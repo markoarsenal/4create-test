@@ -1,0 +1,54 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-rational-order", "stylelint-prettier/recommended"],
+  "plugins": ["stylelint-scss", "stylelint-no-unsupported-browser-features"],
+  "ignoreFiles": ["./node_modules/**/*.css"],
+  "rules": {
+    "indentation": 2,
+    "string-quotes": "single",
+    "no-duplicate-selectors": true,
+    "color-hex-case": "lower",
+    "color-hex-length": "short",
+    "color-named": "always-where-possible",
+    "selector-attribute-quotes": "always",
+    "declaration-block-trailing-semicolon": "always",
+    "declaration-block-no-duplicate-properties": true,
+    "declaration-no-important": true,
+    "declaration-colon-space-before": "never",
+    "declaration-colon-space-after": "always",
+    "property-no-vendor-prefix": true,
+    "value-no-vendor-prefix": true,
+    "number-leading-zero": "always",
+    "function-url-quotes": "never",
+    "comment-whitespace-inside": "always",
+    "comment-empty-line-before": "always",
+    "at-rule-no-vendor-prefix": true,
+    "selector-no-vendor-prefix": true,
+    "selector-max-universal": 0,
+    "media-feature-name-no-vendor-prefix": true,
+    "rule-empty-line-before": [
+      "always",
+      {
+        "except": ["inside-block-and-after-rule", "inside-block"]
+      }
+    ],
+    "plugin/no-unsupported-browser-features": [
+      true,
+      {
+        "severity": "warning"
+      }
+    ],
+    "order/properties-order": [],
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": ["layer"]
+      }
+    ],
+    "selector-pseudo-class-no-unknown": [
+      true,
+      {
+        "ignorePseudoClasses": ["global"]
+      }
+    ]
+  }
+}

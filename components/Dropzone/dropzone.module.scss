@@ -1,0 +1,16 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: #666;
+  background-color: #eee;
+  border: 3px dashed #aaa;
+  cursor: pointer;
+}
+
+.drag {
+  background-color: #ddd;
+  border-color: #999;
+}
