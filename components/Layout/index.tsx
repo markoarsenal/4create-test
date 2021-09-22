@@ -7,10 +7,10 @@ const Layout = ({ children }: { children: ReactNode }): ReactElement => {
     <div className={styles.root}>
       <header className={styles.header}>
         <Link href="/">
-          <a>Home</a>
+          <a href="/">Home</a>
         </Link>
         <Link href="/edit">
-          <a>Edit</a>
+          <a href="/edit">Edit</a>
         </Link>
       </header>
       <main>{children}</main>

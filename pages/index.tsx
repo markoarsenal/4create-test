@@ -11,7 +11,7 @@ const Home: NextPage = () => {
     <Dropzone
       onUpload={(json) => {
         store.setJSON(json);
-        push('/edit');
+        void push('/edit');
       }}
     />
   );

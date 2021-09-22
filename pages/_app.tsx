@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import Layout from 'components/Layout';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import 'styles/reset.scss';
 import 'styles/style.scss';
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps): ReactElement {
   return (
     <>
       <Head>

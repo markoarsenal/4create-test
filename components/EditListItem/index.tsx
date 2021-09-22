@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useCallback, useState } from 'react';
 import { nanoid } from 'nanoid';
-import { parseISO, format } from 'date-fns';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 import styles from './editlistitem.module.scss';
 import FormControl from '@mui/material/FormControl';
-import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Radio from '@mui/material/Radio';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
@@ -21,9 +19,9 @@ type EditListItemProps = {
 };
 
 const emailRegex =
-  /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+  /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
 
-const EditListItem = ({ name, value, className }: EditListItemProps) => {
+const EditListItem = ({ name, value, className, onEdit }: EditListItemProps): ReactElement | null => {
   const [fieldValue, setFieldValue] = useState(value);
   let type = 'text';
 
@@ -53,7 +51,7 @@ const EditListItem = ({ name, value, className }: EditListItemProps) => {
                   size="small"
                   fullWidth
                   type="number"
-                  onChange={(e) => setFieldValue(e.target.value)}
+                  onChange={(e) => setFieldValue(parseInt(e.target.value))}
                 />
               )}
               {type === 'date' && (
@@ -88,10 +86,7 @@ const EditListItem = ({ name, value, className }: EditListItemProps) => {
                   label="true"
                   name={nameId}
                   checked={fieldValue === true}
-                  onChange={() => {
-                    // console.log(fieldValue, e.target.value === 'true');
-                    setFieldValue(true);
-                  }}
+                  onChange={() => setFieldValue(true)}
                 />
                 <FormControlLabel
                   value={false}
@@ -99,17 +94,19 @@ const EditListItem = ({ name, value, className }: EditListItemProps) => {
                   label="false"
                   name={nameId}
                   checked={fieldValue === false}
-                  onChange={() => {
-                    // console.log(fieldValue, e.target.value === 'true');
-                    setFieldValue(false);
-                  }}
+                  onChange={() => setFieldValue(false)}
                 />
               </FormControl>
             </>
           )}
         </div>
         <div>
-          <Button variant="contained" color="success" disabled={value === fieldValue}>
+          <Button
+            variant="contained"
+            color="success"
+            disabled={value === fieldValue}
+            onClick={() => onEdit?.(name, fieldValue)}
+          >
             Save
           </Button>
         </div>

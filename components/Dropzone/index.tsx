@@ -9,23 +9,26 @@ export type DropzoneProps = {
 };
 
 const Dropzone = ({ onUpload }: DropzoneProps): ReactElement => {
-  const onDrop = useCallback((acceptedFiles) => {
-    acceptedFiles.forEach((file: File) => {
-      const reader = new FileReader();
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      acceptedFiles.forEach((file) => {
+        const reader = new FileReader();
 
-      reader.onload = (e) => {
-        try {
-          if (e.target) {
-            const result = JSON.parse(e.target.result as string);
-            onUpload(result);
+        reader.onload = (e) => {
+          try {
+            if (e.target) {
+              const result = JSON.parse(e.target.result as string) as JsonItem[];
+              onUpload(result);
+            }
+          } catch (err) {
+            console.error(err);
           }
-        } catch (err) {
-          console.error(err);
-        }
-      };
-      reader.readAsText(file);
-    });
-  }, []);
+        };
+        reader.readAsText(file);
+      });
+    },
+    [onUpload],
+  );
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop, accept: 'application/JSON' });
 
   return (
