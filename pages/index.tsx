@@ -1,9 +1,20 @@
 import React from 'react';
 import type { NextPage } from 'next';
 import Dropzone from 'components/Dropzone';
+import { store } from 'store';
+import { useRouter } from 'next/dist/client/router';
 
 const Home: NextPage = () => {
-  return <Dropzone />;
+  const { push } = useRouter();
+
+  return (
+    <Dropzone
+      onUpload={(json) => {
+        store.setJSON(json);
+        push('/edit');
+      }}
+    />
+  );
 };
 
 export default Home;

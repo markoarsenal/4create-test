@@ -1,0 +1,17 @@
+.header {
+  margin-bottom: 10px;
+}
+
+.name {
+  font-weight: bold;
+}
+
+.row {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.control {
+  flex-grow: 1;
+}

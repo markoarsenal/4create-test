@@ -23,7 +23,7 @@
     "comment-empty-line-before": "always",
     "at-rule-no-vendor-prefix": true,
     "selector-no-vendor-prefix": true,
-    "selector-max-universal": 0,
+    "selector-max-universal": null,
     "media-feature-name-no-vendor-prefix": true,
     "rule-empty-line-before": [
       "always",
