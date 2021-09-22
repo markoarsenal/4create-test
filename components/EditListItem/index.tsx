@@ -35,6 +35,8 @@ const EditListItem = ({ name, value, className }: EditListItemProps) => {
     type = 'date';
   }
 
+  const nameId = nanoid();
+
   return name !== 'id' && name !== '_id' && typeof value !== 'object' ? (
     <div className={className}>
       <div className={styles.header}>
@@ -47,7 +49,7 @@ const EditListItem = ({ name, value, className }: EditListItemProps) => {
               {type === 'number' && (
                 <TextField
                   label={name}
-                  defaultValue={value}
+                  defaultValue={fieldValue}
                   size="small"
                   fullWidth
                   type="number"
@@ -67,7 +69,7 @@ const EditListItem = ({ name, value, className }: EditListItemProps) => {
               {(type === 'text' || type === 'email') && (
                 <TextField
                   label={name}
-                  defaultValue={value}
+                  defaultValue={fieldValue}
                   size="small"
                   fullWidth
                   multiline={typeof value === 'string' && value.length > 50}
@@ -80,15 +82,28 @@ const EditListItem = ({ name, value, className }: EditListItemProps) => {
           {typeof value === 'boolean' && (
             <>
               <FormControl component="fieldset">
-                <RadioGroup
-                  aria-label={name}
-                  defaultValue={value}
-                  name={nanoid()}
-                  onChange={(e) => setFieldValue(e.target.value)}
-                >
-                  <FormControlLabel value={true} control={<Radio />} label="true" />
-                  <FormControlLabel value={false} control={<Radio />} label="false" />
-                </RadioGroup>
+                <FormControlLabel
+                  value={true}
+                  control={<Radio />}
+                  label="true"
+                  name={nameId}
+                  checked={fieldValue === true}
+                  onChange={() => {
+                    // console.log(fieldValue, e.target.value === 'true');
+                    setFieldValue(true);
+                  }}
+                />
+                <FormControlLabel
+                  value={false}
+                  control={<Radio />}
+                  label="false"
+                  name={nameId}
+                  checked={fieldValue === false}
+                  onChange={() => {
+                    // console.log(fieldValue, e.target.value === 'true');
+                    setFieldValue(false);
+                  }}
+                />
               </FormControl>
             </>
           )}
