@@ -19,7 +19,7 @@ module.exports = {
   ],
   coverageReporters: ['json', 'lcov', 'text', 'clover', 'cobertura'],
   transform: {
-    '\\.[jt]sx?$': ['babel-jest', { configFile: './mocks/.babel-jestrc' }],
+    '\\.[jt]sx?$': ['babel-jest', { configFile: './.babel-jestrc' }],
   },
   globals: {
     ...defaults.globals,

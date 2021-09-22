@@ -1,5 +1,6 @@
 import React, { ReactElement, useCallback, useState } from 'react';
 import { nanoid } from 'nanoid';
+import clsx from 'clsx';
 import TextField, { TextFieldProps } from '@mui/material/TextField';
 import styles from './editlistitem.module.scss';
 import FormControl from '@mui/material/FormControl';
@@ -29,14 +30,14 @@ const EditListItem = ({ name, value, className, onEdit }: EditListItemProps): Re
     type = 'number';
   } else if (typeof value === 'string' && emailRegex.test(value)) {
     type = 'email';
-  } else if (typeof value === 'string' && !isNaN(new Date(value.replaceAll(' ', '')).getTime())) {
+  } else if (typeof value === 'string' && !isNaN(new Date(value.replace(/\s/g, '')).getTime())) {
     type = 'date';
   }
 
   const nameId = nanoid();
 
   return name !== 'id' && name !== '_id' && typeof value !== 'object' ? (
-    <div className={className}>
+    <div className={clsx(className)} data-testid="edit-list-item">
       <div className={styles.header}>
         <span className={styles.name}>{name}:</span> {value}
       </div>
@@ -58,7 +59,7 @@ const EditListItem = ({ name, value, className, onEdit }: EditListItemProps): Re
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
                     label={'dlfkj'}
-                    value={new Date((value as string).replaceAll(' ', ''))}
+                    value={new Date((value as string).replace(/\s/g, ''))}
                     onChange={(date) => setFieldValue(date?.toISOString())}
                     renderInput={(params: TextFieldProps) => <TextField {...params} size="small" fullWidth />}
                   />
